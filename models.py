@@ -7,6 +7,7 @@ class Constants(markets_models.Constants):
 class Subsession(markets_models.Subsession):
     constants = Constants
 
+
 class Group(markets_models.Group):
     pass
 
