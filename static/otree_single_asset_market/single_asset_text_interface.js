@@ -12,8 +12,8 @@ import '/static/otree_markets/event_log.js';
 import './order_enter_widget.js';
 
 /*
-    this component is the main entry point for the text interface frontend. it maintains the market state in
-    the `bids`, `asks` and `trades` array properties and coordinates communication with the backend
+    this component is a single-asset market, implemented using otree_markets' trader_state components and some of
+    otree_markets' reusable UI widgets.
 */
 
 class SingleAssetTextInterface extends PolymerElement {
@@ -23,8 +23,8 @@ class SingleAssetTextInterface extends PolymerElement {
             bids: Array,
             asks: Array,
             trades: Array,
-            settledAssets: Object,
-            availableAssets: Object,
+            settledAssets: Number,
+            availableAssets: Number,
             settledCash: Number,
             availableCash: Number,
         };
@@ -143,7 +143,7 @@ class SingleAssetTextInterface extends PolymerElement {
             this.$.log.error('Invalid order entered');
             return;
         }
-        this.$.trader_state.enter_order(order);
+        this.$.trader_state.enter_order(order.price, order.volume, order.is_bid);
     }
 
     // triggered when this player cancels an order
@@ -165,7 +165,7 @@ class SingleAssetTextInterface extends PolymerElement {
         if (order.pcode == this.pcode)
             return;
 
-        this.$.modal.modal_text = `Do you want to ${order.is_bid ? 'buy' : 'sell'} asset ${order.asset_name} for $${order.price}?`
+        this.$.modal.modal_text = `Do you want to ${order.is_bid ? 'buy' : 'sell'} for $${order.price}?`
         this.$.modal.on_close_callback = (accepted) => {
             if (!accepted)
                 return;
@@ -179,10 +179,9 @@ class SingleAssetTextInterface extends PolymerElement {
     _confirm_trade(event) {
         const trade = event.detail;
         const all_orders = trade.making_orders.concat([trade.taking_order]);
-        for (order of all_orders) {
-            if (order.pcode == this.pcode) {
-                this.$.log.info(`You ${order.is_bid ? 'bought' : 'sold'} ${order.traded_volume} ${order.traded_volume == 1 ? 'unit' : 'units'} of asset ${order.asset_name}`);
-            }
+        for (let order of all_orders) {
+            if (order.pcode == this.pcode)
+                this.$.log.info(`You ${order.is_bid ? 'bought' : 'sold'} ${order.traded_volume} ${order.traded_volume == 1 ? 'unit' : 'units'}`);
         }
     }
 

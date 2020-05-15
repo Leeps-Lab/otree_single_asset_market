@@ -11,7 +11,8 @@ class OrderEnterWidget extends PolymerElement {
     static get properties() {
         return {
             cash: Number,
-            assets: Object,
+            settledAssets: Number,
+            availableAssets: Number,
         };
     }
 
@@ -47,8 +48,8 @@ class OrderEnterWidget extends PolymerElement {
                     </div>
                     <div>Available Cash: $[[availableCash]]</div>
                     <div>Settled Cash: $[[settledCash]]</div>
-                    <div>Available Assets: [[availableAssets.A]]</div>
-                    <div>Settled Assets: [[settledAssets.A]]</div>
+                    <div>Available Assets: [[availableAssets]]</div>
+                    <div>Settled Assets: [[settledAssets]]</div>
                 </div>
                 <div id="order-input">
                     <h4>Submit an Order</h4>
@@ -73,8 +74,6 @@ class OrderEnterWidget extends PolymerElement {
             price: price,
             volume: volume,
             is_bid: is_bid,
-            // we're only doing single asset for now, so hardcode the asset name to A
-            asset_name: 'A',
         }
         this.dispatchEvent(new CustomEvent('order-entered', {detail: order}));
     }

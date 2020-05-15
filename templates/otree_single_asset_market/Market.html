@@ -1,4 +1,4 @@
-{% extends "otree_redwood/Page.html" %}
+{% extends "otree_markets/Page.html" %}
 {% load staticfiles otree %}
 
 {% block title %}
@@ -11,14 +11,6 @@
 
 {% block content %}
 
-    <single-asset-text-interface
-        bids="{{ bids }}"
-        asks="{{ asks }}"
-        settled-assets="{{ settled_assets }}"
-        available-assets="{{ available_assets }}"
-        settled-cash="{{ settled_cash }}"
-        available-cash="{{ available_cash }}"
-        trades="{{ trades }}"
-    ></single-asset-text-interface>
+    <single-asset-text-interface></single-asset-text-interface>
 
 {% endblock %}

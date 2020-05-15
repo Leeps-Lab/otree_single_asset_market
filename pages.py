@@ -1,6 +1,8 @@
-from otree_markets import pages as markets_pages
+from otree_markets.pages import BaseMarketPage
 
-class Market(markets_pages.BaseMarketPage):
-    pass
+class Market(BaseMarketPage):
+
+    def is_displayed(self):
+        return self.round_number <= self.subsession.config.num_rounds
 
 page_sequence = [Market]
