@@ -42,7 +42,7 @@ class Group(markets_models.Group):
 
 class Player(markets_models.Player):
 
-    def asset_endowment(self, asset_name):
+    def asset_endowment(self):
         return self.subsession.config.asset_endowment
     
     def cash_endowment(self):
