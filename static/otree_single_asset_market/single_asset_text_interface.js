@@ -3,16 +3,16 @@ import '/static/otree-redwood/src/redwood-channel/redwood-channel.js';
 import '/static/otree-redwood/src/otree-constants/otree-constants.js';
 
 import '/static/otree_markets/trader_state.js'
-
 import '/static/otree_markets/order_list.js';
 import '/static/otree_markets/trade_list.js';
 import '/static/otree_markets/simple_modal.js';
 import '/static/otree_markets/event_log.js';
+import '/static/otree_markets/disable-interface-overlay.js';
 
 import './order_enter_widget.js';
 
 /*
-    this component is a single-asset market, implemented using otree_markets' trader_state components and some of
+    this component is a single-asset market, implemented using otree_markets' trader_state component and some of
     otree_markets' reusable UI widgets.
 */
 
@@ -61,6 +61,9 @@ class SingleAssetTextInterface extends PolymerElement {
                     flex: 0 1 90%;
                 }
             </style>
+
+            <disable-interface-overlay
+            ></disable-interface-overlay>
 
             <simple-modal
                 id="modal"
@@ -160,6 +163,7 @@ class SingleAssetTextInterface extends PolymerElement {
         this.$.modal.show();
     }
 
+    // triggered when this player accepts someone else's order
     _order_accepted(event) {
         const order = event.detail;
         if (order.pcode == this.pcode)
