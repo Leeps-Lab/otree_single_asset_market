@@ -7,7 +7,6 @@ import '/static/otree_markets/order_list.js';
 import '/static/otree_markets/trade_list.js';
 import '/static/otree_markets/simple_modal.js';
 import '/static/otree_markets/event_log.js';
-import '/static/otree_markets/disable-interface-overlay.js';
 
 import './order_enter_widget.js';
 
@@ -61,9 +60,6 @@ class SingleAssetTextInterface extends PolymerElement {
                     flex: 0 1 90%;
                 }
             </style>
-
-            <disable-interface-overlay
-            ></disable-interface-overlay>
 
             <simple-modal
                 id="modal"
