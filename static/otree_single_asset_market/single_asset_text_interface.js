@@ -59,6 +59,10 @@ class SingleAssetTextInterface extends PolymerElement {
                 #log-container > div {
                     flex: 0 1 90%;
                 }
+
+                order-list, trade-list, event-log {
+                    border: 1px solid black;
+                }
             </style>
 
             <simple-modal
